@@ -9,9 +9,11 @@ import React, {
 } from 'react'
 import ReactDOM from 'react-dom'
 import Highlight, { defaultProps } from 'prism-react-renderer'
-import Editor from '@matthamlin/react-code-editor'
+import CodeEditor from '@matthamlin/react-code-editor'
 
-export function createRenderer(mountSelector = `[data-react-preview-editor="preview"]`) {
+export function createRenderer(
+  mountSelector = `[data-react-preview-editor="preview"]`,
+) {
   return function render(element) {
     ReactDOM.render(element, document.querySelector(mountSelector))
   }

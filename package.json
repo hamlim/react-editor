@@ -3,5 +3,14 @@
   "workspaces": [
     "packages/preview",
     "packages/editor"
-  ]
+  ],
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": ".jest-config.js"
+    },
+    "projects": [
+      "<rootDir>/packages/editor",
+      "<rootDir>/packages/preview"
+    ]
+  }
 }
