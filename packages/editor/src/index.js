@@ -1,5 +1,7 @@
-import React, { useEffect, useReducer, useCallback, useRef } from 'react'
+import React from 'react'
 import Editor from 'react-simple-code-editor'
+
+const { useEffect, useReducer, useCallback, useRef } = React
 
 function getLineNumber(codeString, selectionStart) {
   return codeString.substr(0, selectionStart).split('\n').length
@@ -33,7 +35,10 @@ function createReducer(options) {
               if (line.startsWith('// ')) {
                 didRemoveComment = true
               }
-              return [...newCode, line.startsWith('// ') ? line.split('// ')[1] : `// ${line}`]
+              return [
+                ...newCode,
+                line.startsWith('// ') ? line.split('// ')[1] : `// ${line}`,
+              ]
             }
             return [...newCode, line]
           }, [])
@@ -72,7 +77,9 @@ function ComplexEditor({ initialValue, formatCode, formatOnSave, ...props }) {
   useEffect(() => {
     // Do initial setup of the refs, we use one to store the textarea instance
     // and another to determine if we are on a mac or not to switch keyboard shortcuts
-    editorRef.current = document.querySelector('#react-complex-code-editor--element')
+    editorRef.current = document.querySelector(
+      '#react-complex-code-editor--element',
+    )
     isMacRef.current = navigator.userAgent.includes('Mac OS X')
   }, [])
 
@@ -128,13 +135,15 @@ function ComplexEditor({ initialValue, formatCode, formatOnSave, ...props }) {
     [state.code],
   )
 
-  const onValueChange = useCallback(code => dispatch({ type: 'EDIT', payload: code }), [])
+  const handleValueChange = useCallback(code => {
+    dispatch({ type: 'EDIT', payload: code })
+  }, [])
 
   return (
     <Editor
       {...props}
       value={state.code}
-      onValueChange={onValueChange}
+      onValueChange={handleValueChange}
       textareaId="react-complex-code-editor--element"
       onKeyDown={handleKeyDown}
     />

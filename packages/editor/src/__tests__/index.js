@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from 'react-testing-library'
+import { render, fireEvent, cleanup } from 'react-testing-library'
 import Editor from '../index.js'
 
 const CODE = `import React from "react";
@@ -11,6 +11,10 @@ function App() {
 }
 ReactDOM.render(<App />, document.getElementById("root"));`
 
+afterEach(cleanup)
+
 test('it renders', () => {
-  expect(() => render(<Editor initialValue={CODE} highlight={code => code} />)).not.toThrow()
+  expect(() =>
+    render(<Editor initialValue={CODE} highlight={code => code} />),
+  ).not.toThrow()
 })

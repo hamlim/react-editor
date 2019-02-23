@@ -1,6 +1,13 @@
 import React from 'react'
 import { render, cleanup } from 'react-testing-library'
-import { Provider, Preview, Editor, usePreview, useEditor, createRenderer } from '../index.js'
+import {
+  Provider,
+  Preview,
+  Editor,
+  usePreview,
+  useEditor,
+  createRenderer,
+} from '../index.js'
 import 'jest-dom/extend-expect'
 
 afterEach(cleanup)
@@ -8,7 +15,10 @@ afterEach(cleanup)
 test('it renders', () => {
   expect(() =>
     render(
-      <Provider code={'const a = "a"'}>
+      <Provider
+        code={`function Test(){ return 'Test'; };
+      render(React.createElement(Test));`}
+      >
         <Editor />
         <Preview />
       </Provider>,
